@@ -1,0 +1,9 @@
+Package: xyz.burritoz.thomz.multiplaAPIExample
+Name: Multipla API Example
+Depends: mobilesubstrate, preferenceloader, xyz.burritoz.thomz.multipla
+Version: 1.0
+Architecture: iphoneos-arm
+Description: An awesome Multipla extension!
+Maintainer: Thomz and burrit0z
+Author: Thomz and burrit0z
+Section: Addons
