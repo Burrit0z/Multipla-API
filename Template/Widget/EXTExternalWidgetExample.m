@@ -1,26 +1,10 @@
-#import <UIKit/UIKit.h>
+#import "EXTExternalWidgetExample.h"
 
-
-// please see README for explanation
-@protocol MPAWidgetProtocol
-@required
-- (void)updateWidget;
-@optional
-- (void)widgetBecameFocused;
-- (void)widgetLostFocus;
-@end
-
-@interface ExternalWidgetExample : UIView <MPAWidgetProtocol>
-- (instancetype)initWithFrame:(CGRect)arg1;
-- (void)updateWidget;
-@end
-
-@implementation ExternalWidgetExample
+@implementation EXTExternalWidgetExample
 
 - (instancetype)initWithFrame:(CGRect)arg1 {
     self = [super initWithFrame:arg1];
-    if (self) {
-
+    if(self) {
         // add a label
         UILabel *label = [[UILabel alloc] init];
         [label setFont:[UIFont systemFontOfSize:15]];
@@ -39,11 +23,9 @@
             [label.centerXAnchor constraintEqualToAnchor:self.centerXAnchor],
             [label.centerYAnchor constraintEqualToAnchor:self.centerYAnchor]
         ]];
-
     }
     return self;
 }
-
 
 - (void)updateWidget {
     // called when scrolling ends and the widget needs an update.

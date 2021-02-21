@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleExecutable</key>
-	<string>ExternalWidgetExample</string>
+	<string>EXTExternalWidgetExample</string>
 	<key>NSPrincipalClass</key>
-	<string>ExternalWidgetExample</string>
+	<string>EXTExternalWidgetExample</string>
 	<key>name</key>
 	<string>External Widget</string>
 </dict>

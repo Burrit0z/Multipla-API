@@ -2,37 +2,30 @@
 A guide of the API included with Multipla!
 
 ## Getting Started
-Multipla loads bundles of widgets located at /Library/Multipla/Widgets. To add your own widget, simply make a DragonBuild/Theos bundle project. An template of a DragonMake for a third party widget is as follows:
+Multipla loads bundles of widgets located at /Library/Multipla/Widgets. To add your own widget, simply make a DragonBuild/Theos bundle project. 
 
-```yaml
-name: TweakName
-icmd: killall -9 SpringBoard
+A template of the Makefile for a third party widget is as follows:
+```Makefile
+export ARCHS = arm64 arm64e
+export TARGET := iphone:clang:latest:13.0
+export SYSROOT = $(THEOS)/sdks/iPhoneOS.sdk
+export FINALPACKAGE = 1
 
-all:
-    targetvers: 13.0
-    archs:
-        - arm64
-        - arm64e
+include $(THEOS)/makefiles/common.mk
 
-TweakName:
-    type: tweak
-    logos_files: "Tweak.xm"
+BUNDLE_NAME = CRPCryptoWidget
 
-ExternalWidgetExample:
-    dir: Widget
-    type: bundle
-    files:
-        - ExternalWidgetExample.m
-    frameworks:
-        - UIKit
-        - Foundation
-    install_location: /Library/Multipla/Widgets/
- ```
+CRPCryptoWidget_FILES = Widget/CRPCryptoWidget.m
+CRPCryptoWidget_FRAMEWORKS = UIKit
+CRPCryptoWidget_INSTALL_PATH = /Library/Multipla/Widgets
+CRPCryptoWidget_CFLAGS = -fobjc-arc
 
-**NOTE:** As of builds before 12/7/2020, dragon seems to be broken with the `bundle` option. The Info.plist is installed in /Library/Multipla/Widgets/ExternalWidgetExample.bundle/ExternalWidgetExample.bundle/Info.plist, as opposed to /Library/Multipla/Widgets/ExternalWidgetExample.bundle/Info.plist. This will cause a crash.
+ADDITIONAL_CFLAGS += -DTHEOS_LEAN_AND_MEAN
 
-This bug has been reported to kritanta, and has since been fixed by him. Update dragon by running `dragon update`
-
+include $(THEOS_MAKE_PATH)/bundle.mk
+SUBPROJECTS += Prefs
+include $(THEOS_MAKE_PATH)/aggregate.mk
+```
 
 ## Requirements
 
@@ -48,11 +41,11 @@ Template for a Info.plist for the battery widget class shown above in the Dragon
 <plist version="1.0">
 <dict>
 	<key>CFBundleExecutable</key>
-	<string>ExternalWidgetExample</string>
+	<string>CRPCryptoWidget</string>
 	<key>NSPrincipalClass</key>
-	<string>ExternalWidgetExample</string>
+	<string>CRPCryptoWidget</string>
 	<key>name</key>
-	<string>External Widget</string>
+	<string>Crypto</string>
 </dict>
 </plist>
 
@@ -92,4 +85,4 @@ Your widget class must implement the following protocol:
 If you need to refresh your widget while it is showing, you can make use of system post notifications being sent, or even include a tweak subproject for the purpose of sending these notifications to update whenever you choose. Just add an observer in the init method for the notification you want to listen for, and have it call the selector `updateWidget`.
 
 ## Closing notes
-If you are confused, dm me on Twitter (@burrit0ztweaks) or take a look at the template/example project (catgirl-widget) in this repository. The widget will appear in the select widgets page in Multipla's settings.
+If you are confused, dm me on Twitter (@burrit0ztweaks) or take a look at the template/example projects (catgirl-widget and crypto-widget) in this repository. The widget will appear in the select widgets page in Multipla's settings.

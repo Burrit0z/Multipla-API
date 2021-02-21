@@ -1,4 +1,4 @@
-Package: xyz.burritoz.thomz.multiplaAPIExample
+Package: xyz.burritoz.thomz.multiplaapiexample
 Name: Multipla API Example
 Depends: mobilesubstrate, preferenceloader, xyz.burritoz.thomz.multipla
 Version: 1.0
