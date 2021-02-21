@@ -2,3 +2,7 @@
 	path = catgirl-widget
 	url = https://github.com/Burrit0z/catgirl-widget.git
 	branch = master
+[submodule "crypto-widget"]
+	path = crypto-widget
+	url = https://github.com/burrit0z/crypto-widget.git
+	branch = master
